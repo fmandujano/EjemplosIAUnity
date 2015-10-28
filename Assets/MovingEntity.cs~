@@ -1,0 +1,35 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class MovingEntity : MonoBehaviour 
+{
+	Vector3 velocidad;
+	Vector3 aceleracion;
+
+	public float rapidezMaxima = 100;
+	public float fuerzaMaxima = 100; //magnitud
+	public float masa = 1;
+	public float friccion = 0.1f; 
+	public Vector3 Fuerza;
+
+	public float rotacion;
+
+	// Use this for initialization
+	void Start () 
+	{
+		//condiciones iniciales
+		velocidad = Vector3.zero;
+		aceleracion = Vector3.zero;
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		aceleracion = Fuerza / masa;
+		velocidad += (aceleracion * Time.deltaTime) - (friccion * velocidad) ;
+		transform.position += velocidad * Time.deltaTime;
+		
+		//calcular angulo de rotacion en base a la velocidad
+		rotacion = Mathf.Atan2( velocidad.y, velocidad.x);
+	}
+}

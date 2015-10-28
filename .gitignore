@@ -1,0 +1,50 @@
+WindowsPhone8/
+
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+MSPrueba_Data/
+BuildWindows/
+BuildWP8/
+BuildIOS
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# Blender
+*.blend1
+*.blend2
+*.blend1.meta
+*.blend2.meta
+
+*.apk
+*.xap
+
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
