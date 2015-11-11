@@ -4,8 +4,8 @@ using System.Collections;
 public class SteeringBehaviours : MonoBehaviour
 {
 	MovingEntity entity;
-	Vector3 posCursor;
-	Vector3 posCursorAnt;
+	public Vector3 posCursor;
+	public Vector3 posCursorAnt;
 
 	public float VagarDistancia;
 	public float VagarRadio;
@@ -51,32 +51,7 @@ public class SteeringBehaviours : MonoBehaviour
 		//					wander() * 0.2f +
 		//					flee(posCursor) * 0.7f;
 
-		//tramado prioritizado , prioritized dithering
-		float dado = Random.value;
-		if(dado<0.4f)
-		{
-			entity.Fuerza =WallAvoidance();
-		}
-		else if(dado >= 0.4f  && dado < 0.7f)
-		{
-			entity.Fuerza =wander();
-		}
-		else
-		{
-			entity.Fuerza =flee(posCursor);
-		}
-		/*
-		if (Input.GetKey(KeyCode.A))
-			entity.Fuerza = seek(posCursor);
-		else if (Input.GetKey(KeyCode.S))
-			entity.Fuerza = arrive(posCursor);
-		else if (Input.GetKey(KeyCode.D))
-			entity.Fuerza = flee(posCursor);
-		else if (Input.GetKey(KeyCode.F))
-			entity.Fuerza = intercept(posCursor, velCursor);
-		else
-			entity.Fuerza = Vector3.zero;
-		*/
+		
 
 
 		posCursorAnt = posCursor;
