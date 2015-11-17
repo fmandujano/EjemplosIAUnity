@@ -74,7 +74,7 @@ public class SteeringBehaviours : MonoBehaviour
 	/// </summary>
 	/// <param name="objetivo"></param>
 	/// <returns></returns>
-	Vector3 arrive(Vector3 objetivo)
+	public Vector3 arrive(Vector3 objetivo)
 	{
 		Vector3 a = objetivo - entity.transform.position;
 		a.z = 0;

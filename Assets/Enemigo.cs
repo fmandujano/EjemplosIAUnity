@@ -6,6 +6,9 @@ public class Enemigo : MonoBehaviour
 	Estado<Enemigo> CurrentState;
 	Estado<Enemigo> PreviousState;
 
+	public SteeringBehaviours CE;
+	public MovingEntity ME;
+
 	//cambiar estado
 	public void ChangeState(Estado<Enemigo> NewState)
 	{
@@ -23,6 +26,8 @@ public class Enemigo : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		CE = GetComponent<SteeringBehaviours>();
+		ME = GetComponent<MovingEntity>();
 		CurrentState = EEnemigoPatrullar.Instance;
 	}
 	
@@ -56,16 +61,14 @@ public class EEnemigoPatrullar : Estado<Enemigo>
 
 	public override void Execute(Enemigo entity)
 	{
-		SteeringBehaviours sb = entity.GetComponent<SteeringBehaviours>();
-		MovingEntity me = entity.GetComponent<MovingEntity>();
+		entity.ME.Fuerza = entity.CE.Patrullar();
 
-		me.Fuerza = sb.Patrullar();
-
-
-		if(Input.GetKeyUp(KeyCode.Space ))
+		//radio de escucha de ruidos 
+		if( (entity.CE.posCursor - entity.transform.position).sqrMagnitude < 15  )
 		{
 			entity.ChangeState(EEnemigoAlertaAmarilla.Instance);
 		}
+
 	}
 }
 
@@ -77,6 +80,21 @@ public class EEnemigoAlertaAmarilla : Estado<Enemigo>
 	static EEnemigoAlertaAmarilla() { }
 	protected EEnemigoAlertaAmarilla() { }
 
+	public override void Execute(Enemigo entity)
+	{
+		entity.ME.Fuerza = entity.CE.arrive(entity.CE.posCursor);
+
+		//obtener el angulo con el jugador
+		Vector3 AB =  Vector3.Normalize(  entity.CE.posCursor - entity.transform.position);
+		Vector3 heading = entity.ME.Velocidad.normalized;
+		
+		//si esta dentro del cono de vision
+		if ( Vector3.Dot(AB, heading) > 0.8)
+		{
+			entity.ChangeState( EEnemigoAlertaRoja.Instance);
+		}	
+
+	}
 	public override void OnGUI(Enemigo enemigo)
 	{
 		GUI.contentColor = Color.red;
@@ -85,3 +103,16 @@ public class EEnemigoAlertaAmarilla : Estado<Enemigo>
 }
 
 
+public class EEnemigoAlertaRoja : Estado<Enemigo>
+{
+	static readonly EEnemigoAlertaRoja instance = new EEnemigoAlertaRoja();
+	public static EEnemigoAlertaRoja Instance { get { return instance; } }
+	static EEnemigoAlertaRoja() { }
+	protected EEnemigoAlertaRoja() { }
+
+	public override void OnGUI(Enemigo enemigo)
+	{
+		GUI.contentColor = Color.red;
+		GUI.Label(new Rect(100, 100, 200, 50), "EN ALERTA ROJA MATAR O MORIR");
+	}
+}
