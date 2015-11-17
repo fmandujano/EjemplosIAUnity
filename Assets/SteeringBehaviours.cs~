@@ -210,7 +210,7 @@ public class SteeringBehaviours : MonoBehaviour
 			nodoActual = nodoActual % NodosPatrulla.Length;
 			Debug.Log(" nodo actual: "+nodoActual);
 		}	  
-		return seek( NodosPatrulla[nodoActual].transform.position  );
+		return arrive( NodosPatrulla[nodoActual].transform.position  );
 	}
 
 
