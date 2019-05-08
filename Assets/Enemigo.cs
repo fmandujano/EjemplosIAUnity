@@ -115,4 +115,16 @@ public class EEnemigoAlertaRoja : Estado<Enemigo>
 		GUI.contentColor = Color.red;
 		GUI.Label(new Rect(100, 100, 200, 50), "EN ALERTA ROJA MATAR O MORIR");
 	}
+
+	public override void Execute(Enemigo entity)
+	{
+		entity.ME.Fuerza = entity.CE.seek(entity.CE.posCursor);
+
+
+
+		//obtener el angulo con el jugador
+		Vector3 AB = Vector3.Normalize(entity.CE.posCursor - entity.transform.position);
+		Vector3 heading = entity.ME.Velocidad.normalized;
+
+	}
 }

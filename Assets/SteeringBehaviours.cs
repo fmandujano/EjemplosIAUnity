@@ -62,7 +62,7 @@ public class SteeringBehaviours : MonoBehaviour
 	/// </summary>
 	/// <param name="objetivo"></param>
 	/// <returns></returns>
-	Vector3 seek(Vector3 objetivo)
+	public Vector3 seek(Vector3 objetivo)
 	{
 		Vector3 a = objetivo - entity.transform.position;
 		a.z = 0;
@@ -89,7 +89,7 @@ public class SteeringBehaviours : MonoBehaviour
 		return fres;
 	}
 
-	Vector3 flee(Vector3 objetivo)
+	public Vector3 flee(Vector3 objetivo)
 	{
 		Vector3 a = objetivo - entity.transform.position;
 		a.z = 0;
@@ -101,7 +101,7 @@ public class SteeringBehaviours : MonoBehaviour
 	/// </summary>
 	/// <param name="objetivo"></param>
 	/// <returns></returns>
-	Vector3 intercept(Vector3 objetivo, Vector3 velocidadObjetivo)
+	public Vector3 intercept(Vector3 objetivo, Vector3 velocidadObjetivo)
 	{
 		//estimar el tiempo de llegada en base a nuestra velocidad
 		float distObj = (objetivo - transform.position).sqrMagnitude ;
